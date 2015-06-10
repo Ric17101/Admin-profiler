@@ -1,2 +1,2 @@
 # Admin-profiler
-Admin Profile Starter Djadngo App
+Admin Profile Starter Django App
