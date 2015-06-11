@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>{% block title %}Profiler{% endblock %}</title>
+
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="/static/css/base.min.css">
+	<link rel="stylesheet" href="/static/css/skeleton.min.css">
+	<link rel="stylesheet" href="/static/css/layout.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+
+  <!-- ICON
+  ================================================== -->
+  <link rel="shortcut icon" href="/static/img/icon.png" />
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+  {% block extrahead %}{% endblock %}
+</head>
+<body>
+  {% block sidebar %}
+  {% endblock %}
+  <div class="container">
+    <div class="sixteen columns">
+      <div class="sign-in-out-block">
+
+        {% if request.user.is_authenticated or user.is_authenticated %}
+          {{ email }}
+          {{ user.username }}:&nbsp; <a href="{% url 'account_settings' %}">Account settings</a>&nbsp;&nbsp;&nbsp;<a href="{% url 'signout' %}">Sign out</a>
+        {% else %}
+          <a href="{% url 'signup' %}">Sign up</a>&nbsp;&nbsp;&nbsp;<a href="{% url 'signin' %}">Sign in</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="sixteen columns">
+      <h1 class="bold-header">
+        <a href="/home" class="header">pro<span class="jam">filer: </span></a>
+        {% block page_title %}
+          <span>All notes</span>
+        {% endblock %}
+      </h1>
+    </div>
+    
+    <div class="{% block content_class %}thirteen columns content-area{% endblock %}">
+      {% if messages %}
+        <div class="alert-area">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block content %}
+      {% endblock %}
+    </div>
+    <hr class="footer" />
+    <div class="footer">
+      <div>Profiler: <strong>Django</strong> application</div>
+      <div><a href="https://github.com/Ric17101/profiler">Github</a>, <a href="https://twitter.com/">Twitter</a>, created by <a href="https://github.com/Ric17101/">Richard</a></div>
+    </div>
+  </div><!-- container -->
+  <a href="https://github.com/komarserjio/notejam"><img style="position: absolute; bottom: 0; right: 0; border: 0;" src="/static/" alt="Fork me on GitHub"></a>
+</body>
+</html>
